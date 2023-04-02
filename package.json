@@ -1,0 +1,59 @@
+{
+  "name": "who-am-i-now",
+  "version": "1.0.0",
+  "description": "Platform detection: NodeJS? React? ReactNative? Expo? etc.",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "scripts": {
+    "clear-build-folder": "rm -rf ./build",
+    "transpile": "tsc",
+    "fix-paths": "tsc-alias",
+    "build": "yarn clear-build-folder && yarn transpile && yarn fix-paths",
+    "dev": "yarn nodemon",
+    "test": "jest"
+  },
+  "keywords": [
+    "detect",
+    "platform",
+    "platform specific code",
+    "react",
+    "nextjs",
+    "expo",
+    "react-native",
+    "react-native-web",
+    "ios",
+    "web",
+    "android",
+    "nodejs",
+    "pwa",
+    "standalone",
+    "twa",
+    "jest",
+    "cypress"
+  ],
+  "files": [
+    "build"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maks-io/who-am-i-now.git"
+  },
+  "author": "Markus Kurzmann <markus@kurzmann.io>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/maks-io/who-am-i-now/issues"
+  },
+  "homepage": "https://github.com/maks-io/who-am-i-now#readme",
+  "dependencies": {
+    "react-device-detect": "^2.2.3"
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.10",
+    "nodemon": "^2.0.22",
+    "prettier": "^2.8.7",
+    "ts-jest": "^29.0.5",
+    "tsc": "^2.0.4",
+    "tsc-alias": "^1.8.4",
+    "typescript": "^5.0.2"
+  }
+}
