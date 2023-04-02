@@ -64,7 +64,10 @@ export const whoAmINow = () => {
   let isTWA = false,
     isPWAStandalone = false;
   let isStandalone = false;
-  if (typeof window !== "undefined") {
+  if (
+    typeof window !== "undefined" &&
+    typeof window?.matchMedia === "function"
+  ) {
     isStandalone = window?.matchMedia("(display-mode: standalone)")?.matches;
   }
   if (typeof document !== "undefined") {
