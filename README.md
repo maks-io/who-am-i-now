@@ -36,9 +36,9 @@ yarn add who-am-i-now
 ## Usage
 
 ```typescript
-import { whoAmINow } from "who-am-i-now";
+import WhoAmINow from "who-am-i-now";
 
-const who = whoAmINow();
+const who = WhoAmINow();
 
 // Example result:
 // who = {

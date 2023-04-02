@@ -1,11 +1,10 @@
 export const whoAmINow = () => {
-  let browserName, isMobile, reactDeviceDetect;
+  let browserName, reactDeviceDetect;
 
   try {
     reactDeviceDetect = require("react-device-detect");
 
     browserName = reactDeviceDetect?.browserName;
-    isMobile = reactDeviceDetect?.isMobile;
   } catch (e) {
     // do nothing
   }
@@ -58,11 +57,7 @@ export const whoAmINow = () => {
     }
   }
 
-  if (isReactNativeApp && !isReactNativeAppWeb) {
-    isMobile = true;
-  } else {
-    isMobile = false;
-  }
+  const isMobile = isReactNativeApp && !isReactNativeAppWeb;
 
   const isDesktop = !isMobile;
 
