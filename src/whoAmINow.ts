@@ -1,5 +1,5 @@
 export const whoAmINow = () => {
-  let browserName, reactDeviceDetect;
+  let browserName: string, reactDeviceDetect;
 
   try {
     reactDeviceDetect = require("react-device-detect");
@@ -84,10 +84,6 @@ export const whoAmINow = () => {
   let isJestTestRun = Boolean(process.env.JEST_WORKER_ID);
 
   return {
-    ...reactDeviceDetect,
-    isBrowser,
-    isMobile,
-    isDesktop,
     isReactNativeApp,
     isReactNativeAppIOS,
     isReactNativeAppAndroid,
@@ -102,5 +98,46 @@ export const whoAmINow = () => {
     isTestRun,
     isCypressTestRun,
     isJestTestRun,
+    isBrowser,
+    isMobile,
+    isDesktop,
+    isMobileOnly: reactDeviceDetect?.isMobileOnly as boolean,
+    isTablet: reactDeviceDetect?.isTablet as boolean,
+    isSmartTV: reactDeviceDetect?.isSmartTV as boolean,
+    isWearable: reactDeviceDetect?.isWearable as boolean,
+    isConsole: reactDeviceDetect?.isConsole as boolean,
+    isEmbedded: reactDeviceDetect?.isEmbedded as boolean,
+    isAndroid: reactDeviceDetect?.isAndroid as boolean,
+    isWinPhone: reactDeviceDetect?.isWinPhone as boolean,
+    isIOS: reactDeviceDetect?.isIOS as boolean,
+    isChrome: reactDeviceDetect?.isChrome as boolean,
+    isFirefox: reactDeviceDetect?.isFirefox as boolean,
+    isSafari: reactDeviceDetect?.isSafari as boolean,
+    isOpera: reactDeviceDetect?.isOpera as boolean,
+    isIE: reactDeviceDetect?.isIE as boolean,
+    isEdge: reactDeviceDetect?.isEdge as boolean,
+    isYandex: reactDeviceDetect?.isYandex as boolean,
+    isChromium: reactDeviceDetect?.isChromium as boolean,
+    isMobileSafari: reactDeviceDetect?.isMobileSafari as boolean,
+    isSamsungBrowser: reactDeviceDetect?.isSamsungBrowser as boolean,
+    osVersion: reactDeviceDetect?.osVersion as string,
+    osName: reactDeviceDetect?.osName as string,
+    fullBrowserVersion: reactDeviceDetect?.fullBrowserVersion as string,
+    browserVersion: reactDeviceDetect?.browserVersion as string,
+    browserName,
+    mobileVendor: reactDeviceDetect?.mobileVendor as string,
+    mobileModel: reactDeviceDetect?.mobileModel as string,
+    engineName: reactDeviceDetect?.engineName as string,
+    engineVersion: reactDeviceDetect?.engineVersion as string,
+    deviceType: reactDeviceDetect?.deviceType as string,
+    isIOS13: reactDeviceDetect?.isIOS13 as boolean,
+    isIPhone13: reactDeviceDetect?.isIPhone13 as boolean,
+    isIPad13: reactDeviceDetect?.isIPad13 as boolean,
+    isIPod13: reactDeviceDetect?.isIPod13 as boolean,
+    isElectron: reactDeviceDetect?.isElectron as boolean,
+    isEdgeChromium: reactDeviceDetect?.isEdgeChromium as boolean,
+    isLegacyEdge: reactDeviceDetect?.isLegacyEdge as boolean,
+    isWindows: reactDeviceDetect?.isWindows as boolean,
+    isMacOs: reactDeviceDetect?.isMacOs as boolean,
   };
 };
