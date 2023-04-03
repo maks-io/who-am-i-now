@@ -1,4 +1,6 @@
-export const whoAmINow = () => {
+import { Who } from "./Who";
+
+export const whoAmINow = (): Who => {
   let browserName: string, reactDeviceDetect;
 
   try {

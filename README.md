@@ -36,9 +36,9 @@ yarn add who-am-i-now
 ## Usage
 
 ```typescript
-import WhoAmINow from "who-am-i-now";
+import WhoAmINow, { Who } from "who-am-i-now";
 
-const who = WhoAmINow();
+const who: Who = WhoAmINow();
 
 // Example result:
 // who = {
@@ -65,7 +65,7 @@ Every prop is either
 
 - inheriting the behaviour from the original `react-device-detect` library (entries marked with \*\*), or
 - having a different behaviour compared to the original `react-device-detect` library (entries marked with \*), or
-- is completely new (black entries in table)
+- completely new (entries in table without asterisks)
 
 | selector                | type    | explanation                                                                                                                                                                                         |
 | ----------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
