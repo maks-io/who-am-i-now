@@ -1,3 +1,7 @@
+import { BrowserTypes } from "./BrowserTypes";
+import { DeviceTypes } from "./DeviceTypes";
+import { OsTypes } from "./OsTypes";
+
 export interface Who {
   isReactNativeApp: boolean;
   isReactNativeAppIOS: boolean;
@@ -36,15 +40,15 @@ export interface Who {
   isMobileSafari: boolean;
   isSamsungBrowser: boolean;
   osVersion: string;
-  osName: string;
+  osName: OsTypes;
   fullBrowserVersion: string;
   browserVersion: string;
-  browserName: string;
+  browserName: BrowserTypes;
   mobileVendor: string;
   mobileModel: string;
   engineName: string;
   engineVersion: string;
-  deviceType: string;
+  deviceType: DeviceTypes;
   isIOS13: boolean;
   isIPhone13: boolean;
   isIPad13: boolean;

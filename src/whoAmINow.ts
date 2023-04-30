@@ -1,7 +1,8 @@
-import { Who } from "./Who";
+import { Who } from "./types/Who";
+import { BrowserTypes } from "./types/BrowserTypes";
 
 export const whoAmINow = (): Who => {
-  let browserName: string, reactDeviceDetect;
+  let browserName: BrowserTypes, reactDeviceDetect;
 
   try {
     reactDeviceDetect = require("react-device-detect");
@@ -123,7 +124,7 @@ export const whoAmINow = (): Who => {
     isMobileSafari: reactDeviceDetect?.isMobileSafari as boolean,
     isSamsungBrowser: reactDeviceDetect?.isSamsungBrowser as boolean,
     osVersion: reactDeviceDetect?.osVersion as string,
-    osName: reactDeviceDetect?.osName as string,
+    osName: reactDeviceDetect?.osName,
     fullBrowserVersion: reactDeviceDetect?.fullBrowserVersion as string,
     browserVersion: reactDeviceDetect?.browserVersion as string,
     browserName,
@@ -131,7 +132,7 @@ export const whoAmINow = (): Who => {
     mobileModel: reactDeviceDetect?.mobileModel as string,
     engineName: reactDeviceDetect?.engineName as string,
     engineVersion: reactDeviceDetect?.engineVersion as string,
-    deviceType: reactDeviceDetect?.deviceType as string,
+    deviceType: reactDeviceDetect?.deviceType,
     isIOS13: reactDeviceDetect?.isIOS13 as boolean,
     isIPhone13: reactDeviceDetect?.isIPhone13 as boolean,
     isIPad13: reactDeviceDetect?.isIPad13 as boolean,
