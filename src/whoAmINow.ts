@@ -43,8 +43,10 @@ export const whoAmINow = (): Who => {
   let isServerApp = !isReactApp && !isReactNativeApp;
   let isNextApp = isReactApp && Boolean(document?.getElementById("__next"));
 
-  delete reactDeviceDetect.BrowserTypes;
-  delete reactDeviceDetect.OsTypes;
+  if (reactDeviceDetect) {
+    delete reactDeviceDetect.BrowserTypes;
+    delete reactDeviceDetect.OsTypes;
+  }
 
   let isReactNativeAppIOS = false,
     isReactNativeAppAndroid = false,
