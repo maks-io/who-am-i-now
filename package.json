@@ -1,6 +1,6 @@
 {
   "name": "who-am-i-now",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Platform detection: NodeJS? React? ReactNative? Expo? etc.",
   "main": "build/index.js",
   "types": "build/index.d.ts",

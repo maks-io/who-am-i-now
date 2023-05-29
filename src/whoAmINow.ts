@@ -15,7 +15,7 @@ export const whoAmINow = (): Who => {
   let isReactNativeApp = false;
   try {
     const rn = require("./reactNative");
-    isReactNativeApp = Boolean(rn?.default);
+    isReactNativeApp = Boolean(rn?.default) && rn?.default?.valid !== false;
   } catch (e) {
     // do nothing
   }
@@ -23,7 +23,7 @@ export const whoAmINow = (): Who => {
   let isExpoApp = false;
   try {
     const expo = require("./expo");
-    isExpoApp = Boolean(expo?.default);
+    isExpoApp = Boolean(expo?.default) && expo?.default?.valid !== false;
   } catch (e) {
     // do nothing
   }
