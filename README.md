@@ -2,6 +2,8 @@
 
 [![Version](https://img.shields.io/npm/v/who-am-i-now)](https://www.npmjs.com/package/who-am-i-now)
 
+<img alt="who-gif" src="./documentation/who-gif.gif" />
+
 Which platform am I on?
 
 Do you need to run platform specific code?
@@ -18,6 +20,16 @@ If you need to (programmatically) find the answer to one of the following questi
 - etc.
 
 This package is extending the functionality of [react-device-detect](https://www.npmjs.com/package/react-device-detect), by additionally detecting which 'platform' your code is running on and other things.
+
+## Live demos
+### Using who-am-i-now in an expo app
+https://snack.expo.dev/@maks-io/who-am-i-now-demo
+
+### Using who-am-i-now in a react app
+https://stackblitz.com/edit/who-am-i-now-react
+
+### Using who-am-i-now in a next.js app
+https://stackblitz.com/edit/who-am-i-now-nextjs
 
 ## Installation
 
@@ -125,3 +137,7 @@ Every prop is either
 | isLegacyEdge\*\*        | boolean | returns the same value `react-device-detect` returns                                                                                                                                                |
 | isWindows\*\*           | boolean | returns the same value `react-device-detect` returns                                                                                                                                                |
 | isMacOs\*\*             | boolean | returns the same value `react-device-detect` returns                                                                                                                                                |
+
+## Misc
+
+Youtube short: https://youtube.com/shorts/sKyRYo9h514?feature=share
