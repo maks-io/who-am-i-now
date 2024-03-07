@@ -1,6 +1,6 @@
 {
   "name": "who-am-i-now",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Platform detection: NodeJS? React? ReactNative? Expo? etc.",
   "main": "build/index.js",
   "types": "build/index.d.ts",
@@ -48,12 +48,12 @@
     "react-device-detect": "^2.2.3"
   },
   "devDependencies": {
-    "@types/node": "^20.1.0",
-    "nodemon": "^2.0.22",
-    "prettier": "^2.8.8",
-    "ts-jest": "^29.1.0",
+    "@types/node": "^20.11.25",
+    "nodemon": "^3.1.0",
+    "prettier": "^3.2.5",
+    "ts-jest": "^29.1.2",
     "tsc": "^2.0.4",
-    "tsc-alias": "^1.8.6",
-    "typescript": "^5.0.4"
+    "tsc-alias": "^1.8.8",
+    "typescript": "^5.4.2"
   }
 }
