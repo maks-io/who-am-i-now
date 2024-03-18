@@ -20,10 +20,10 @@ export const whoAmINow = (): Who => {
     // do nothing
   }
 
-  let expo: { default: { valid?: boolean; isExpoAppRunningInGo?: boolean } };
+  let expo: { default: { valid?: boolean; isRunningInExpoGo?: () => boolean } };
   let isExpoApp = false;
   try {
-    expo = require("./expo").default;
+    expo = require("./_expo");
     isExpoApp = Boolean(expo?.default) && expo?.default?.valid !== false;
   } catch (e) {
     // do nothing
@@ -32,7 +32,7 @@ export const whoAmINow = (): Who => {
   let isExpoAppRunningInGo: boolean | undefined;
   let isExpoSnack: boolean | undefined;
   if (isExpoApp) {
-    isExpoAppRunningInGo = expo.default.isExpoAppRunningInGo;
+    isExpoAppRunningInGo = expo.default.isRunningInExpoGo();
     const expoConstants: {
       default: { expoConfig: { scheme: string } };
     } = require("./expoConstants").default;
