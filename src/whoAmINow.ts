@@ -34,9 +34,9 @@ export const whoAmINow = (): Who => {
   if (isExpoApp) {
     isExpoAppRunningInGo = expo.default.isExpoAppRunningInGo;
     const expoConstants: {
-      default: { expoGoConfig: { scheme: string } };
-    } = require("./expoConstants");
-    isExpoSnack = expoConstants.default.expoGoConfig.scheme === "snack";
+      default: { expoConfig: { scheme: string } };
+    } = require("./expoConstants").default;
+    isExpoSnack = expoConstants.default.expoConfig.scheme === "snack";
   }
 
   let isBrowser: boolean;
