@@ -8,6 +8,8 @@ export interface Who {
   isReactNativeAppAndroid: boolean;
   isReactNativeAppWeb: boolean;
   isExpoApp: boolean;
+  isExpoAppRunningInGo: boolean | undefined;
+  isExpoSnack: boolean | undefined;
   isReactApp: boolean;
   isNextApp: boolean;
   isTWA: boolean;

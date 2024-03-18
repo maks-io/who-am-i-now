@@ -20,12 +20,23 @@ export const whoAmINow = (): Who => {
     // do nothing
   }
 
+  let expo: { default: { valid?: boolean; isExpoAppRunningInGo?: boolean } };
   let isExpoApp = false;
   try {
-    const expo = require("./expo");
+    expo = require("./expo");
     isExpoApp = Boolean(expo?.default) && expo?.default?.valid !== false;
   } catch (e) {
     // do nothing
+  }
+
+  let isExpoAppRunningInGo: boolean | undefined;
+  let isExpoSnack: boolean | undefined;
+  if (isExpoApp) {
+    isExpoAppRunningInGo = expo.default.isExpoAppRunningInGo;
+    const expoConstants: {
+      default: { expoGoConfig: { scheme: string } };
+    } = require("./expoConstants");
+    isExpoSnack = expoConstants.default.expoGoConfig.scheme === "snack";
   }
 
   let isBrowser: boolean;
@@ -94,6 +105,8 @@ export const whoAmINow = (): Who => {
     isReactNativeAppAndroid,
     isReactNativeAppWeb,
     isExpoApp,
+    isExpoAppRunningInGo,
+    isExpoSnack,
     isReactApp,
     isNextApp,
     isTWA,
