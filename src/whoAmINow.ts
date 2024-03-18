@@ -23,7 +23,7 @@ export const whoAmINow = (): Who => {
   let expo: { default: { valid?: boolean; isExpoAppRunningInGo?: boolean } };
   let isExpoApp = false;
   try {
-    expo = require("./expo");
+    expo = require("./expo").default;
     isExpoApp = Boolean(expo?.default) && expo?.default?.valid !== false;
   } catch (e) {
     // do nothing
