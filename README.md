@@ -147,3 +147,7 @@ Every prop is either
 ## Misc
 
 Youtube short: https://youtube.com/shorts/sKyRYo9h514?feature=share
+
+## If you enjoy using this...
+
+<a href="https://www.buymeacoffee.com/maks_io" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 48px !important;" ></a>
