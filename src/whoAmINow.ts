@@ -1,3 +1,4 @@
+import isCi from "is-ci"
 import { Who } from "./types/Who";
 import { BrowserTypes } from "./types/BrowserTypes";
 
@@ -94,7 +95,6 @@ export const whoAmINow = (): Who => {
     }
   }
 
-  let isCI = process.env.CI === "true";
   let isTestRun = process.env.NODE_ENV === "test";
   let isCypressTestRun = Boolean(process.env.CYPRESS);
   let isJestTestRun = Boolean(process.env.JEST_WORKER_ID);
@@ -112,7 +112,7 @@ export const whoAmINow = (): Who => {
     isTWA,
     isPWAStandalone,
     isServerApp,
-    isCI,
+    isCI: isCi,
     isTestRun,
     isCypressTestRun,
     isJestTestRun,

@@ -1,6 +1,6 @@
 {
   "name": "who-am-i-now",
-  "version": "2.0.4",
+  "version": "2.1.0",
   "description": "Platform detection: NodeJS? React? ReactNative? Expo? etc.",
   "main": "build/index.js",
   "types": "build/index.d.ts",
@@ -45,9 +45,11 @@
   },
   "homepage": "https://github.com/maks-io/who-am-i-now#readme",
   "dependencies": {
+    "is-ci": "^3.0.1",
     "react-device-detect": "^2.2.3"
   },
   "devDependencies": {
+    "@types/is-ci": "^3.0.4",
     "@types/node": "^20.11.25",
     "nodemon": "^3.1.0",
     "prettier": "^3.2.5",
