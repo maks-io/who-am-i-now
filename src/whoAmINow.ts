@@ -1,43 +1,90 @@
-import isCi from "is-ci"
-import { Who } from "./types/Who";
-import { BrowserTypes } from "./types/BrowserTypes";
+import isCi from "is-ci";
+import type { BrowserTypes } from "./types/BrowserTypes";
+import type { Who } from "./types/Who";
+
+type ReactDeviceDetect = {
+  browserName?: BrowserTypes;
+  isMobileOnly?: boolean;
+  isTablet?: boolean;
+  isSmartTV?: boolean;
+  isWearable?: boolean;
+  isConsole?: boolean;
+  isEmbedded?: boolean;
+  isAndroid?: boolean;
+  isWinPhone?: boolean;
+  isIOS?: boolean;
+  isChrome?: boolean;
+  isFirefox?: boolean;
+  isSafari?: boolean;
+  isOpera?: boolean;
+  isIE?: boolean;
+  isEdge?: boolean;
+  isYandex?: boolean;
+  isChromium?: boolean;
+  isMobileSafari?: boolean;
+  isSamsungBrowser?: boolean;
+  osVersion?: string;
+  osName?: Who["osName"];
+  fullBrowserVersion?: string;
+  browserVersion?: string;
+  mobileVendor?: string;
+  mobileModel?: string;
+  engineName?: string;
+  engineVersion?: string;
+  deviceType?: Who["deviceType"];
+  isIOS13?: boolean;
+  isIPhone13?: boolean;
+  isIPad13?: boolean;
+  isIPod13?: boolean;
+  isElectron?: boolean;
+  isEdgeChromium?: boolean;
+  isLegacyEdge?: boolean;
+  isWindows?: boolean;
+  isMacOs?: boolean;
+};
+
+type ReactNativeModule = { valid?: boolean };
+type ExpoModule = {
+  valid?: boolean;
+  isRunningInExpoGo?: () => boolean;
+};
+type ExpoConstantsModule = {
+  expoConfig?: {
+    scheme?: string;
+  };
+};
+
+const loadOptionalDefault = <T>(modulePath: string): T | undefined => {
+  try {
+    const moduleValue = require(modulePath);
+    return (moduleValue.default ?? moduleValue) as T;
+  } catch (_error) {
+    return undefined;
+  }
+};
+
+const asBoolean = (value: boolean | undefined): boolean => Boolean(value);
 
 export const whoAmINow = (): Who => {
-  let browserName: BrowserTypes, reactDeviceDetect;
+  const reactDeviceDetect = loadOptionalDefault<ReactDeviceDetect | undefined>(
+    "react-device-detect",
+  );
+  const browserName = reactDeviceDetect?.browserName;
 
-  try {
-    reactDeviceDetect = require("react-device-detect");
+  const reactNative = loadOptionalDefault<ReactNativeModule>("./reactNative");
+  const isReactNativeApp =
+    Boolean(reactNative) && reactNative?.valid !== false;
 
-    browserName = reactDeviceDetect?.browserName;
-  } catch (e) {
-    // do nothing
-  }
-
-  let isReactNativeApp = false;
-  try {
-    const rn = require("./reactNative");
-    isReactNativeApp = Boolean(rn?.default) && rn?.default?.valid !== false;
-  } catch (e) {
-    // do nothing
-  }
-
-  let expo: { default: { valid?: boolean; isRunningInExpoGo?: () => boolean } };
-  let isExpoApp = false;
-  try {
-    expo = require("./_expo");
-    isExpoApp = Boolean(expo?.default) && expo?.default?.valid !== false;
-  } catch (e) {
-    // do nothing
-  }
+  const expo = loadOptionalDefault<ExpoModule>("./_expo");
+  const isExpoApp = Boolean(expo) && expo?.valid !== false;
 
   let isExpoAppRunningInGo: boolean | undefined;
   let isExpoSnack: boolean | undefined;
   if (isExpoApp) {
-    isExpoAppRunningInGo = expo.default.isRunningInExpoGo();
-    const expoConstants: {
-      default: { expoConfig: { scheme: string } };
-    } = require("./expoConstants").default;
-    isExpoSnack = expoConstants.default.expoConfig.scheme === "snack";
+    isExpoAppRunningInGo = expo?.isRunningInExpoGo?.();
+    const expoConstants =
+      loadOptionalDefault<ExpoConstantsModule>("./expoConstants");
+    isExpoSnack = expoConstants?.expoConfig?.scheme === "snack";
   }
 
   let isBrowser: boolean;
@@ -55,21 +102,16 @@ export const whoAmINow = (): Who => {
   let isServerApp = !isReactApp && !isReactNativeApp;
   let isNextApp = isReactApp && Boolean(document?.getElementById("__next"));
 
-  if (reactDeviceDetect) {
-    delete reactDeviceDetect.BrowserTypes;
-    delete reactDeviceDetect.OsTypes;
-  }
-
   let isReactNativeAppIOS = false,
     isReactNativeAppAndroid = false,
     isReactNativeAppWeb = false;
   if (isReactNativeApp) {
     try {
-      const platform = require("./platform").default;
+      const platform = require("./platform").default as string | undefined;
       isReactNativeAppIOS = platform === "ios";
       isReactNativeAppAndroid = platform === "android";
       isReactNativeAppWeb = platform === "web";
-    } catch (e) {
+    } catch (_error) {
       // do nothing
     }
   }
@@ -119,43 +161,43 @@ export const whoAmINow = (): Who => {
     isBrowser,
     isMobile,
     isDesktop,
-    isMobileOnly: reactDeviceDetect?.isMobileOnly as boolean,
-    isTablet: reactDeviceDetect?.isTablet as boolean,
-    isSmartTV: reactDeviceDetect?.isSmartTV as boolean,
-    isWearable: reactDeviceDetect?.isWearable as boolean,
-    isConsole: reactDeviceDetect?.isConsole as boolean,
-    isEmbedded: reactDeviceDetect?.isEmbedded as boolean,
-    isAndroid: reactDeviceDetect?.isAndroid as boolean,
-    isWinPhone: reactDeviceDetect?.isWinPhone as boolean,
-    isIOS: reactDeviceDetect?.isIOS as boolean,
-    isChrome: reactDeviceDetect?.isChrome as boolean,
-    isFirefox: reactDeviceDetect?.isFirefox as boolean,
-    isSafari: reactDeviceDetect?.isSafari as boolean,
-    isOpera: reactDeviceDetect?.isOpera as boolean,
-    isIE: reactDeviceDetect?.isIE as boolean,
-    isEdge: reactDeviceDetect?.isEdge as boolean,
-    isYandex: reactDeviceDetect?.isYandex as boolean,
-    isChromium: reactDeviceDetect?.isChromium as boolean,
-    isMobileSafari: reactDeviceDetect?.isMobileSafari as boolean,
-    isSamsungBrowser: reactDeviceDetect?.isSamsungBrowser as boolean,
-    osVersion: reactDeviceDetect?.osVersion as string,
+    isMobileOnly: asBoolean(reactDeviceDetect?.isMobileOnly),
+    isTablet: asBoolean(reactDeviceDetect?.isTablet),
+    isSmartTV: asBoolean(reactDeviceDetect?.isSmartTV),
+    isWearable: asBoolean(reactDeviceDetect?.isWearable),
+    isConsole: asBoolean(reactDeviceDetect?.isConsole),
+    isEmbedded: asBoolean(reactDeviceDetect?.isEmbedded),
+    isAndroid: asBoolean(reactDeviceDetect?.isAndroid),
+    isWinPhone: asBoolean(reactDeviceDetect?.isWinPhone),
+    isIOS: asBoolean(reactDeviceDetect?.isIOS),
+    isChrome: asBoolean(reactDeviceDetect?.isChrome),
+    isFirefox: asBoolean(reactDeviceDetect?.isFirefox),
+    isSafari: asBoolean(reactDeviceDetect?.isSafari),
+    isOpera: asBoolean(reactDeviceDetect?.isOpera),
+    isIE: asBoolean(reactDeviceDetect?.isIE),
+    isEdge: asBoolean(reactDeviceDetect?.isEdge),
+    isYandex: asBoolean(reactDeviceDetect?.isYandex),
+    isChromium: asBoolean(reactDeviceDetect?.isChromium),
+    isMobileSafari: asBoolean(reactDeviceDetect?.isMobileSafari),
+    isSamsungBrowser: asBoolean(reactDeviceDetect?.isSamsungBrowser),
+    osVersion: reactDeviceDetect?.osVersion,
     osName: reactDeviceDetect?.osName,
-    fullBrowserVersion: reactDeviceDetect?.fullBrowserVersion as string,
-    browserVersion: reactDeviceDetect?.browserVersion as string,
+    fullBrowserVersion: reactDeviceDetect?.fullBrowserVersion,
+    browserVersion: reactDeviceDetect?.browserVersion,
     browserName,
-    mobileVendor: reactDeviceDetect?.mobileVendor as string,
-    mobileModel: reactDeviceDetect?.mobileModel as string,
-    engineName: reactDeviceDetect?.engineName as string,
-    engineVersion: reactDeviceDetect?.engineVersion as string,
+    mobileVendor: reactDeviceDetect?.mobileVendor,
+    mobileModel: reactDeviceDetect?.mobileModel,
+    engineName: reactDeviceDetect?.engineName,
+    engineVersion: reactDeviceDetect?.engineVersion,
     deviceType: reactDeviceDetect?.deviceType,
-    isIOS13: reactDeviceDetect?.isIOS13 as boolean,
-    isIPhone13: reactDeviceDetect?.isIPhone13 as boolean,
-    isIPad13: reactDeviceDetect?.isIPad13 as boolean,
-    isIPod13: reactDeviceDetect?.isIPod13 as boolean,
-    isElectron: reactDeviceDetect?.isElectron as boolean,
-    isEdgeChromium: reactDeviceDetect?.isEdgeChromium as boolean,
-    isLegacyEdge: reactDeviceDetect?.isLegacyEdge as boolean,
-    isWindows: reactDeviceDetect?.isWindows as boolean,
-    isMacOs: reactDeviceDetect?.isMacOs as boolean,
+    isIOS13: asBoolean(reactDeviceDetect?.isIOS13),
+    isIPhone13: asBoolean(reactDeviceDetect?.isIPhone13),
+    isIPad13: asBoolean(reactDeviceDetect?.isIPad13),
+    isIPod13: asBoolean(reactDeviceDetect?.isIPod13),
+    isElectron: asBoolean(reactDeviceDetect?.isElectron),
+    isEdgeChromium: asBoolean(reactDeviceDetect?.isEdgeChromium),
+    isLegacyEdge: asBoolean(reactDeviceDetect?.isLegacyEdge),
+    isWindows: asBoolean(reactDeviceDetect?.isWindows),
+    isMacOs: asBoolean(reactDeviceDetect?.isMacOs),
   };
 };

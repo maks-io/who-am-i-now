@@ -5,12 +5,22 @@
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "scripts": {
-    "clear-build-folder": "rm -rf ./build",
-    "transpile": "tsc",
+    "clean": "rimraf ./build",
+    "transpile": "tsc -p tsconfig.json",
     "fix-paths": "tsc-alias",
-    "build": "yarn clear-build-folder && yarn transpile && yarn fix-paths",
-    "dev": "yarn nodemon",
-    "test": "jest"
+    "build": "npm run clean && npm run transpile && npm run fix-paths",
+    "dev": "nodemon",
+    "verify": "npm run build && npm test",
+    "prepare": "husky",
+    "test": "jest --runInBand",
+    "test:watch": "jest --watch",
+    "commit": "node ./scripts/commit.cjs",
+    "commitlint": "commitlint --from=HEAD~1 --to=HEAD",
+    "commitlint:edit": "commitlint --edit",
+    "release:core": "semantic-release",
+    "release:dry-run:core": "semantic-release --dry-run --no-ci",
+    "release:dry-run": "node ./scripts/release-runner.cjs --dry-run",
+    "release": "node ./scripts/release-runner.cjs"
   },
   "keywords": [
     "detect",
@@ -45,20 +55,48 @@
   },
   "homepage": "https://github.com/maks-io/who-am-i-now#readme",
   "dependencies": {
-    "is-ci": "^3.0.1",
+    "is-ci": "^4.1.0",
     "react-device-detect": "^2.2.3"
   },
   "devDependencies": {
+    "@commitlint/cli": "^20.5.0",
+    "@commitlint/config-conventional": "^20.5.0",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^12.0.6",
+    "@semantic-release/npm": "^13.1.5",
     "@types/is-ci": "^3.0.4",
-    "@types/node": "^22.7.5",
-    "nodemon": "^3.1.7",
-    "prettier": "^3.3.3",
-    "ts-jest": "^29.2.5",
-    "tsc": "^2.0.4",
-    "tsc-alias": "^1.8.10",
-    "typescript": "^5.6.3"
+    "@types/jest": "^30.0.0",
+    "@types/node": "^25.5.2",
+    "husky": "^9.1.7",
+    "jest": "^30.3.0",
+    "jest-environment-jsdom": "^30.3.0",
+    "nodemon": "^3.1.14",
+    "prettier": "^3.8.1",
+    "rimraf": "^6.1.3",
+    "semantic-release": "^25.0.3",
+    "ts-jest": "^29.4.9",
+    "tsc-alias": "^1.8.16",
+    "typescript": "^6.0.2"
   },
   "peerDependencies": {
     "expo-constants": "^15.4.5"
+  },
+  "peerDependenciesMeta": {
+    "expo-constants": {
+      "optional": true
+    }
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "roots": [
+      "<rootDir>/src"
+    ],
+    "testMatch": [
+      "**/*.test.ts"
+    ],
+    "clearMocks": true,
+    "restoreMocks": true
   }
 }

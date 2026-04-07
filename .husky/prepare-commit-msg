@@ -1,0 +1,5 @@
+if [ "${FORCE_INTERACTIVE_COMMIT:-}" != "1" ]; then
+  echo "Direct 'git commit' is blocked in this repository."
+  echo "Use 'npm run commit' so the interactive conventional commit flow can build the message."
+  exit 1
+fi
