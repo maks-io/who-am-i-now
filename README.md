@@ -148,6 +148,35 @@ Every prop is either
 
 Youtube short: https://youtube.com/shorts/sKyRYo9h514?feature=share
 
-## If you enjoy using this...
+## Release workflow
 
-<a href="https://www.buymeacoffee.com/maks_io" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 48px !important;" ></a>
+Releases are automated via `semantic-release` and are triggered by pushes to `main`.
+
+- Feature branches are safe to push and only run CI.
+- Commits that land on `main` must follow the conventional commit format.
+- `semantic-release` decides whether to publish a new version based on the commits since the last git tag.
+
+### Source of truth for versions
+
+The canonical released version is the latest npm version / git tag / GitHub Release.
+
+The checked-in `package.json` version in this repository may lag behind the latest published npm version. This is expected in the current setup because release metadata is generated during CI and is not committed back to `main`.
+
+If you want to inspect the latest released version locally, fetch tags and inspect the most recent one:
+
+```bash
+git fetch --tags
+git tag --sort=-version:refname | head -n 5
+```
+
+### Local commands
+
+```bash
+npm run commit
+npm run verify
+npm run release:dry-run
+```
+
+- `npm run commit` opens the interactive conventional commit flow.
+- `npm run verify` runs the build and test suite.
+- `npm run release:dry-run` previews what `semantic-release` would do without publishing.
